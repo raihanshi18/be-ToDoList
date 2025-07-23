@@ -46,15 +46,20 @@ class ActivityController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Activity $activity)
+    public function show(string $id)
     {
-        $activities = Activity::find($activity->id);
-        if (!$activities) {
-            return response(['message' => 'Activity not found'], 404);
+        $activity = Activity::find($id);
+
+        if (!$activity) {
+            return response([
+                'message' => 'Activity not found',
+                'data' => []
+            ], 404);
         }
+
         return response([
             'message' => 'Activity found',
-            'data' => $activities,
+            'data' => $activity,
         ], 200);
     }
 

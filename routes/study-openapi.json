@@ -1,0 +1,237 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Todolist API",
+        "description": "API for managing a todo list",
+        "version": "1.0",
+        "contact": {
+            "name": "API Support",
+            "email": "raihanshiddiq18@gmail.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://{env}.contohprogram/v1",
+            "variables": {
+                "env": {
+                    "default": "dev",
+                    "enum": [
+                        "dev",
+                        "staging",
+                        "prod"
+                    ]
+                }
+            }
+        }
+    ],
+    "paths": {
+        "/todolist": {
+            "get": {
+                "summary": "get all Todolist",
+                "description": "Retrieve a list of all todo items",
+                "parameters": [
+                    {
+                        "name": "is_done",
+                        "in": "query",
+                        "required": false,
+                        "description": "is done todolist",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true,
+                            "default": false
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": false,
+                        "description": "Search todolist by name",
+                        "schema": {
+                            "type": "string",
+                            "nullable": true,
+                            "minLenght": 1,
+                            "maxLenght": 100
+                        },
+                        "examples": {
+                            "php": {
+                                "value": "php"
+                            },
+                            "java": {
+                                "value": "java"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succes get all items",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "create a new Todolist",
+                "description": "Create a new todo item",
+                "responses": {
+                    "200": {
+                        "description": "Succes add items",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "java": {
+                                    "value": {
+                                        "name": "Java"
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "required": true,
+                                        "minLenght": 1,
+                                        "maxLenght": 100
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/todolist/{id}": {
+            "put": {
+                "summary": "update a Todolist",
+                "description": "Update an existing todo item",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": "true",
+                        "description": "Todolist id for updated",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succes update items",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "java": {
+                                    "value": {
+                                        "name": "Java"
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "required": true,
+                                        "minLenght": 1,
+                                        "maxLenght": 100
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "delete a Todolist",
+                "description": "Delete an existing todo item",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": "true",
+                        "description": "Todolist id for updated"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succes delete items",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

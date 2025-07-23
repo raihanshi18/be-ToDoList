@@ -13,8 +13,8 @@ Route::post('login', [AuthController::class, 'auth']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('activities', [ActivityController::class, 'index']);
-    Route::post('add-activities', [ActivityController::class, 'store']);
+    Route::post('activities', [ActivityController::class, 'store']);
     Route::get('activities/{activity}', [ActivityController::class, 'show']);
-    Route::put('update-activities/{activity}', [ActivityController::class, 'update']);
-    Route::delete('del-activities/{activity}', [ActivityController::class, 'destroy']);
+    Route::put('activities/{activity}', [ActivityController::class, 'update']);
+    Route::delete('activities/{activity}', [ActivityController::class, 'destroy']);
 });
